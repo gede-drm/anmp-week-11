@@ -18,5 +18,7 @@
         android:id="@+id/studentDetailFragment"
         android:name="com.geded.adv160420008week4.view.StudentDetailFragment"
         android:label="fragment_student_detail"
-        tools:layout="@layout/fragment_student_detail" />
+        tools:layout="@layout/fragment_student_detail" >
+        <argument android:name="studentid" />
+    </fragment>
 </navigation>

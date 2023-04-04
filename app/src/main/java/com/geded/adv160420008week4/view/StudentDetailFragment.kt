@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.geded.adv160420008week4.R
+import com.geded.adv160420008week4.util.loadImage
 import com.geded.adv160420008week4.viewmodel.DetailViewModel
 import com.geded.adv160420008week4.viewmodel.ListViewModel
 
@@ -28,9 +30,12 @@ class StudentDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        viewModel.fetch()
+        if(arguments != null) {
+            val studentId = StudentDetailFragmentArgs.fromBundle(requireArguments()).studentid
+            viewModel.fetch(studentId)
 
-        observeViewModel(view)
+            observeViewModel(view)
+        }
     }
 
     fun observeViewModel(view:View){
@@ -39,6 +44,8 @@ class StudentDetailFragment : Fragment() {
             view.findViewById<EditText>(R.id.txtName).setText(it.name)
             view.findViewById<EditText>(R.id.txtDOB).setText(it.dob)
             view.findViewById<EditText>(R.id.txtPhone).setText(it.phone)
+            var progressBarDetail = view.findViewById<ProgressBar>(R.id.progressBarDetail)
+            view.findViewById<ImageView>(R.id.imgProfileDetail).loadImage(it.photoUrl, progressBarDetail)
         })
     }
 }
