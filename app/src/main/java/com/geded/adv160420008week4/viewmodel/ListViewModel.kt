@@ -18,8 +18,8 @@ class ListViewModel(application: Application):AndroidViewModel(application) {
     val studentLoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
-    val TAG= "volleyTag"
-    private var queue:RequestQueue? = null
+        val TAG= "volleyTag"
+        private var queue:RequestQueue? = null
 
 //    fun refresh(){
 //            val student1 = Student("16055","Nonie","1998/03/28","5718444778","http://dummyimage.com/75x10.jpg/cc0000/ffffff")
@@ -42,7 +42,7 @@ class ListViewModel(application: Application):AndroidViewModel(application) {
         studentLoadErrorLD.value = false
 
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://adv.jitusolution.com/student.php"
+        val url = "http://jitusolution.com/student.php"
 
         val stringRequest = StringRequest(Request.Method.GET, url,
             {
