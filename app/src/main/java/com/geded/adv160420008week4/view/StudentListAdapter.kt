@@ -14,7 +14,7 @@ import com.geded.adv160420008week4.databinding.StudentListLayoutBinding
 import com.geded.adv160420008week4.model.Student
 import com.geded.adv160420008week4.util.loadImage
 
-class StudentListAdapter(val studentList:ArrayList<Student>):RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>()
+class StudentListAdapter(val studentList:ArrayList<Student>):RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>(), ButtonDetailClickListener
 {
     class StudentViewHolder(var view:StudentListLayoutBinding):RecyclerView.ViewHolder(view.root)
 
@@ -27,6 +27,7 @@ class StudentListAdapter(val studentList:ArrayList<Student>):RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         holder.view.student = studentList[position]
+        holder.view.listener = this
 //        val imgProfile = holder.view.findViewById<ImageView>(R.id.imgProfile)
 //        val txtID = holder.view.findViewById<TextView>(R.id.txtID)
 //        val txtName = holder.view.findViewById<TextView>(R.id.txtName)
@@ -54,5 +55,10 @@ class StudentListAdapter(val studentList:ArrayList<Student>):RecyclerView.Adapte
         studentList.clear()
         studentList.addAll(newStudentList)
         notifyDataSetChanged()
+    }
+
+    override fun onButtonDetailClick(v: View) {
+        val action = StudentListFragmentDirections.actionStudentDetail(v.tag.toString())
+        Navigation.findNavController(v).navigate(action)
     }
 }

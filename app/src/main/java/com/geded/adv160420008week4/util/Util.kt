@@ -3,14 +3,17 @@ package com.geded.adv160420008week4.util
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.media.Image
 import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.databinding.BindingAdapter
 import com.geded.adv160420008week4.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
+
 
 fun ImageView.loadImage(url: String?, progressBar:ProgressBar){
     Picasso.get()
@@ -39,4 +42,9 @@ fun createNotificationChannel(context: Context, importance:Int, showBadge: Boole
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         notificationManager.createNotificationChannel(channel)
     }
+}
+
+@BindingAdapter("android:imageUrl", "android:progressBar")
+fun loadPhotoURL(view:ImageView, url:String?, pb:ProgressBar){
+    view.loadImage(url, pb)
 }
